@@ -1,13 +1,12 @@
 import {BlockIdType} from "../block/IBlock";
-import {IContent, IContentsTypes} from "../contents/IContents";
+import {ContentsIdType} from "../contents/IContents";
 
 export type GroupIdType = `group_${string}`;
 
 interface IGroup {
     id: GroupIdType;
-    childrenItem: IContent<IContentsTypes>[];
+    contentsIds: ContentsIdType[];
     parentId: BlockIdType;
-    type: 'GROUP'
 }
 
 export default IGroup;

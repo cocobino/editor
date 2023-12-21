@@ -1,13 +1,12 @@
 import {PageIdType} from "../page/IPage";
-import IBlock from "../block/IBlock";
+import {BlockIdType} from "../block/IBlock";
 
 export type LayoutIdType = `layout_${string}`;
 
 interface ILayout {
     id: LayoutIdType;
-    childrenItem: IBlock[];
+    blockIds: BlockIdType[];
     parentId: PageIdType;
-    type: 'LAYOUT'
 }
 
 export default ILayout;

@@ -1,13 +1,12 @@
 import {LayoutIdType} from "../layout/ILayout";
-import IGroup from "../group/IGroup";
+import {GroupIdType} from "../group/IGroup";
 
 export type BlockIdType = `layout_${string}`;
 
 interface IBlock {
     id: BlockIdType;
-    childrenItem: IGroup[];
+    groupIds: GroupIdType[];
     parentId: LayoutIdType;
-    type: 'BLOCK'
 }
 
 export default IBlock;

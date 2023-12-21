@@ -1,15 +1,25 @@
 import {FC} from "react";
 import EditorBlock from "../block/EditorBlock";
-import ILayout from "../../../interface/layout/ILayout";
+import ILayout, {LayoutIdType} from "../../../interface/layout/ILayout";
 import {css} from "@emotion/css";
+import {useRecoilValue} from "recoil";
+import {layoutAtomFamily} from "../../../recoil/editor/layoutAtom";
 
-const EditorLayout: FC<ILayout> = (props) => {
-    const {childrenItem} = props
+interface Props {
+    id: LayoutIdType
+}
+
+const EditorLayout: FC<Props> = ({id}) => {
+    const layoutAtom = useRecoilValue<ILayout>(layoutAtomFamily(id));
+
+    if (!layoutAtom) return <></>;
+
+    const {blockIds} = layoutAtom
 
     return <div className={css`
         
     `}>
-        {childrenItem.map((block) => <EditorBlock key={block.id} {...block}/>)}
+        {blockIds.map((id) => <EditorBlock key={id} id={id}/>)}
     </div>
 }
 

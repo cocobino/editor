@@ -1,13 +1,23 @@
 import {FC} from "react";
 import EditorContent from "../content";
-import IGroup from "../../../interface/group/IGroup";
+import IGroup, {GroupIdType} from "../../../interface/group/IGroup";
+import {groupAtomFamily} from "../../../recoil/editor/groupAtom";
+import {useRecoilValue} from "recoil";
 
 
-const EditorGroup: FC<IGroup> = (props) => {
-    const {childrenItem} = props
+interface Props {
+    id: GroupIdType
+}
+
+const EditorGroup: FC<Props> = ({id}) => {
+    const groupAtom = useRecoilValue<IGroup>(groupAtomFamily(id));
+
+    if (!groupAtom) return <></>;
+
+    const {contentsIds} = groupAtom;
 
     return <div>
-        {childrenItem.map((props) => <EditorContent key={props.id} {...props}/>)}
+        {contentsIds.map((id) => <EditorContent key={id} id={id}/>)}
     </div>
 }
 

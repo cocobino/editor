@@ -1,17 +1,20 @@
 import EditorLayout from "../layout";
-import {FC} from "react";
-import IPage from "../../../interface/page/IPage";
 import {css} from "@emotion/css";
+import {useRecoilValue} from "recoil";
+import {pageAtom} from "../../../recoil/editor/pageAtom";
 
 
-const EditorPage: FC<IPage> = (props) => {
-    const {childrenItem} = props;
+const EditorPage = () => {
+    const page = useRecoilValue(pageAtom);
+
+
+    const {layoutIds} = page
 
     return <div className={css`
         width: 100%;
         height: 100%;
     `}>
-        {childrenItem.map((props => <EditorLayout key={props.id} {...props}/>))}
+        {layoutIds.map((id => <EditorLayout key={id} id={id}/>))}
     </div>
 }
 

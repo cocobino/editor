@@ -1,11 +1,11 @@
-import ILayout from "../layout/ILayout";
+import {LayoutIdType} from "../layout/ILayout";
 
 export type PageIdType = `page_${string}`;
 
 interface IPage {
     id: PageIdType;
-    childrenItem: ILayout[];
-    type: 'PAGE'
+    layoutIds: LayoutIdType[];
+    style: any
 }
 
 export default IPage

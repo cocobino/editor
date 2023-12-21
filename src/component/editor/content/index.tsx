@@ -1,11 +1,18 @@
 import {FC} from "react";
-import {IContent, IContentsTypes} from "../../../interface/contents/IContents";
+import {ContentsIdType} from "../../../interface/contents/IContents";
 import {css} from "@emotion/css";
 import EditorEmptyContents from "./empty";
+import {useRecoilValue} from "recoil";
+import {contentsAtomFamily} from "../../../recoil/editor/contentAtom";
 
+interface Props {
+    id: ContentsIdType
+}
 
-const EditorContent: FC<IContent<IContentsTypes>> = (props) => {
-    const {contentsType} = props;
+const EditorContent: FC<Props> = ({id}) => {
+    const contentAtom = useRecoilValue(contentsAtomFamily(id));
+
+    const {contentsType} = contentAtom;
 
     const contentsElem = () => {
         switch (contentsType) {
@@ -14,7 +21,7 @@ const EditorContent: FC<IContent<IContentsTypes>> = (props) => {
             case 'IMAGE':
                 return <div>image</div>;
             case 'EMPTY':
-                return <EditorEmptyContents id={props.id}/>
+                return <EditorEmptyContents id={id}/>
             default:
                 return <></>;
         }
